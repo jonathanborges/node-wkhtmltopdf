@@ -105,7 +105,8 @@ function wkhtmltopdf(input, options, callback) {
     // console.log(args.join(' ') + ' | cat ; exit ${PIPESTATUS[0]}');
     // let command = `{${args.join(' ')} || echo status="$?"; } | tee /dev/null`;
     // var child = spawn(wkhtmltopdf.shell, ['-c', command]);
-    var child = spawn(wkhtmltopdf.shell, ['-c', args.join() + ' | cat ; exit 0']);
+    // var child = spawn(wkhtmltopdf.shell, ['-c', args.join() + ' | cat ; exit 0']);
+    var child = spawn("/bin/sh", ['-c', args.join(' ')]);
   }
 
   var stream = child.stdout;
@@ -201,5 +202,4 @@ function wkhtmltopdf(input, options, callback) {
 }
 
 wkhtmltopdf.command = 'wkhtmltopdf';
-wkhtmltopdf.shell = '/bin/sh';
 module.exports = wkhtmltopdf;
